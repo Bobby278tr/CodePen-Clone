@@ -5,6 +5,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import { Logo } from "../assets";
 import { MdHome } from "react-icons/md";
 import { FaSearchengin } from "react-icons/fa6";
+import {Projects, SignUp} from "../Container";
 
 const Home = () => {
   const [isSideMenu, setIsSideMenu] = useState(false);
@@ -76,7 +77,7 @@ const Home = () => {
           {!user && (
           <motion.div whileTap={{scale: 0.9}} className="flex items-center justify-center gap-3">
             <Link to={"/home/auth"} className="bg-emerald-500 px-6 py-2 rounded-md text-white text-lg cursor-pointer hover:bg-emerald-700">
-              SignUp
+            <p className="text-xl text-white">SignUp</p>
             </Link>
 
           </motion.div>)}
