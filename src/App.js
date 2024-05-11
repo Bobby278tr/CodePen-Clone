@@ -1,8 +1,20 @@
-import React from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import { Home } from './Container'
+import { auth } from './config/firebase.config'
 
 const App = () => {
+  const navigate = useNavigate()
+  useEffect(() => {
+    const unSubscribe  = auth.onAuthStateChanged((userCred) => {
+      if(userCred){
+        console.log(userCred.providerData[0])
+      }else{
+        navigate("/home/auth", {replace: true})
+      }
+    })
+  }, [])
+  
   return (
     <div className="w-screen h-screen flex items-start justify-start overflow-hidden">
       <Routes>
