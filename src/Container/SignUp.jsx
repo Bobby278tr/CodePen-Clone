@@ -158,10 +158,10 @@ const SignUp = () => {
 
           {/* or section */}
 
-          <div class="flex items-center justify-center gap-11">
-            <div class="h-px bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
-            <p class="text-sm text-[rgba(256,256,256,0.2)]">OR</p>
-            <div class="h-px bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
+          <div className="flex items-center justify-center gap-11">
+            <div className="h-px bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
+            <p className="text-sm text-[rgba(256,256,256,0.2)]">OR</p>
+            <div className="h-px bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
           </div>
 
           {/* sign in with goggle */}
@@ -177,10 +177,10 @@ const SignUp = () => {
 
           {/* or section */}
 
-          <div class="flex items-center justify-center gap-11">
-            <div class="h-px bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
-            <p class="text-sm text-[rgba(256,256,256,0.2)]">OR</p>
-            <div class="h-px bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
+          <div className="flex items-center justify-center gap-11">
+            <div className="h-px bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
+            <p className="text-sm text-[rgba(256,256,256,0.2)]">OR</p>
+            <div className="h-px bg-[rgba(256,256,256,0.2)] rounded-md w-24"></div>
           </div>
 
           {/* sign in with github */}
