@@ -6,10 +6,12 @@ import { Logo } from "../assets";
 import { MdHome } from "react-icons/md";
 import { FaSearchengin } from "react-icons/fa6";
 import {Projects, SignUp} from "../Container";
+import { useSelector } from "react-redux";
+import { UserProfileDetails } from "../Components";
 
 const Home = () => {
   const [isSideMenu, setIsSideMenu] = useState(false);
-  const [user, setuser] = useState(null);
+  const user = useSelector(state => state.user?.user)
   return (
     <>
       <div
@@ -82,7 +84,7 @@ const Home = () => {
 
           </motion.div>)}
 
-          {user && (<div></div>)}
+          {user && <UserProfileDetails></UserProfileDetails>}
         </div>
         {/* Bottom Section  */}
         <div className="w-full">
