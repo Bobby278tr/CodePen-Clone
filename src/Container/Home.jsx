@@ -5,13 +5,13 @@ import { Link, Route, Routes } from "react-router-dom";
 import { Logo } from "../assets";
 import { MdHome } from "react-icons/md";
 import { FaSearchengin } from "react-icons/fa6";
-import {Projects, SignUp} from "../Container";
+import { Projects, SignUp } from "../Container";
 import { useSelector } from "react-redux";
 import { UserProfileDetails } from "../Components";
 
 const Home = () => {
   const [isSideMenu, setIsSideMenu] = useState(false);
-  const user = useSelector(state => state.user?.user)
+  const user = useSelector((state) => state.user?.user);
   return (
     <>
       <div
@@ -42,7 +42,7 @@ const Home = () => {
 
           {/* Start coding option */}
           <Link to={"/newProject"}>
-            <div className="px-6 py-3 flex items-center justify-center rounded-xl border border-gray-400 cursor-pointer group hover:border-gray-200">
+          <div className="px-6 py-3 flex items-center justify-center rounded-xl border border-gray-400 cursor-pointer group hover:border-gray-200">
               <p className="text-gray-400 cursor-pointer group hover:text-gray-200">
                 start coding
               </p>
@@ -77,20 +77,26 @@ const Home = () => {
           {/* profile section */}
 
           {!user && (
-          <motion.div whileTap={{scale: 0.9}} className="flex items-center justify-center gap-3">
-            <Link to={"/home/auth"} className="bg-emerald-500 px-6 py-2 rounded-md text-white text-lg cursor-pointer hover:bg-emerald-700">
-            <p className="text-xl text-white">SignUp</p>
-            </Link>
+            <motion.div
+              whileTap={{ scale: 0.9 }}
+              className="flex items-center justify-center gap-3"
+            >
+              <Link
+                to={"/home/auth"}
+                className="bg-emerald-500 px-6 py-2 rounded-md text-white text-lg cursor-pointer hover:bg-emerald-700"
+              >
+                <p className="text-xl text-white">SignUp</p>
+              </Link>
+            </motion.div>
+          )}
 
-          </motion.div>)}
-
-          {user && <UserProfileDetails></UserProfileDetails>}
+          {user && <UserProfileDetails/>}
         </div>
         {/* Bottom Section  */}
         <div className="w-full">
           <Routes>
-            <Route path="/*" element={<Projects/>} />
-            <Route path="/auth" element={<SignUp/>} />
+            <Route path="/*" element={<Projects />} />
+            <Route path="/auth" element={<SignUp />} />
           </Routes>
         </div>
       </div>

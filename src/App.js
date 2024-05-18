@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import { Home } from "./Container";
+import { Home, NewProject } from "./Container";
 import { auth, db } from "./config/firebase.config";
 import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { Spinner } from "./Components";
 import { useDispatch } from "react-redux";
-import { SET_USER} from './context/actions/userActions'
+import { SET_USER } from './context/actions/userActions'
+// import {} from 'react-router-dom'
 
 const App = () => {
   const navigate = useNavigate();
@@ -21,32 +22,43 @@ const App = () => {
           () => {
             // dispact the action to redux store
             dispatch(SET_USER(userCred?.providerData[0]))
-            navigate("/home/projects", {replace: true})
+            // navigate("../home/projects")
           }
         );
       } else {
-        navigate("/home/auth", { replace: true });
+        // navigate("/home/auth");
       }
-      setInterval(() => {
-        setIsLoading(false)
+      
+      const intervalId = setInterval(() => {
+        setIsLoading(false);
       }, 2000);
+  
+      return () => {
+        clearInterval(intervalId);
+      };
+
     });
 
     //clean up the listerner event
     return () => unSubscribe();
-  }, [dispatch, navigate]);
+
+    // eslint-disable-next-line
+  }, [dispatch, navigate])
 
   return (
     <>
       {isLoading ? (
         <div className="w-screen h-screen flex items-center justify-center overflow-hidden">
-          <Spinner></Spinner>
+          <Spinner/>
         </div>
       ) : (
         <div className="w-screen h-screen flex items-start justify-start overflow-hidden">
           <Routes>
             <Route path="/home/*" element={<Home />} />
-            <Route path="*" element={<Navigate to={"/home"} />} />
+            <Route path="/newProject" element={<NewProject />} />
+
+            {/* if the routes are not matching  */}
+            <Route path="*" element={<Navigate to={"/home/"} />} />
           </Routes>
         </div>
       )}

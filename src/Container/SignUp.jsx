@@ -12,8 +12,10 @@ import {
 } from "firebase/auth";
 import { auth } from "../config/firebase.config";
 import { fadeInOut } from "../animations";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [getEmailValidationStatus, setGetEmailValidationStatus] =
@@ -28,6 +30,7 @@ const SignUp = () => {
         .then((userCred) => {
           if (userCred) {
             console.log(userCred);
+            navigate("../home/projects")
           }
         })
         .catch((err) => console.log(err));
@@ -40,6 +43,7 @@ const SignUp = () => {
         .then((userCred) => {
           if (userCred) {
             console.log(userCred);
+            navigate("../home/projects")
           }
         })
         .catch((err) => {
