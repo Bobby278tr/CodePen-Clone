@@ -6,8 +6,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { Spinner } from "./Components";
 import { useDispatch } from "react-redux";
-import { SET_USER } from './context/actions/userActions'
-// import {} from 'react-router-dom'
+import { SET_USER } from './context/actions/userActions';
 
 const App = () => {
   const navigate = useNavigate();
@@ -22,11 +21,11 @@ const App = () => {
           () => {
             // dispact the action to redux store
             dispatch(SET_USER(userCred?.providerData[0]))
-            // navigate("../home/projects")
+            navigate("../home/projects")
           }
         );
       } else {
-        // navigate("/home/auth");
+        navigate("/home/auth");
       }
       
       const intervalId = setInterval(() => {
@@ -43,7 +42,7 @@ const App = () => {
     return () => unSubscribe();
 
     // eslint-disable-next-line
-  }, [dispatch, navigate])
+  }, [])
 
   return (
     <>

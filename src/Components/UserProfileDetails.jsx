@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaChevronDown } from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Menus, signOutAction } from "../utils/helpers";
 import { slideUpOut } from "../animations";
 
 const UserProfileDetails = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const user = useSelector((state) => state.user?.user);
   const [isMenu, setIsMenu] = useState(false);
 
-  const handleOnClick = () => {
-    navigate("../home/projects")
-  }
+  // const handleOnClick = () => {
+  //   navigate("../home/projects")
+  // }
 
   return (
     <div className="flex items-center justify-center gap-4 relative">
@@ -66,7 +66,7 @@ const UserProfileDetails = () => {
               whileTap={{ scale: 0.9 }}
               className="text-primaryText hover:bg-[rgba(256,256,256,0.05)] px-2 py-1 w-full rounded-md cursor-pointer"
             >
-              <p onClick={handleOnClick}>Sign Out</p>
+              <p>Sign Out</p>
             </motion.p>
           </motion.div>
         )}
