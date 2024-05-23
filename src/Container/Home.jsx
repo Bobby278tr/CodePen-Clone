@@ -6,12 +6,17 @@ import { Logo } from "../assets";
 import { MdHome } from "react-icons/md";
 import { FaSearchengin } from "react-icons/fa6";
 import { Projects, SignUp } from "../Container";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { UserProfileDetails } from "../Components";
+import { SET_SEARCH_TERM } from "../context/actions/searchActions";
 
 const Home = () => {
   const [isSideMenu, setIsSideMenu] = useState(false);
   const user = useSelector((state) => state.user?.user);
+  const searchTerm = useSelector((state) =>
+    state.searchTerm?.searchTerm ? state.searchTerm?.searchTerm : ""
+  );
+  const dispatch = useDispatch()
   return (
     <>
       <div
@@ -42,7 +47,7 @@ const Home = () => {
 
           {/* Start coding option */}
           <Link to={"/newProject"}>
-          <div className="px-6 py-3 flex items-center justify-center rounded-xl border border-gray-400 cursor-pointer group hover:border-gray-200">
+            <div className="px-6 py-3 flex items-center justify-center rounded-xl border border-gray-400 cursor-pointer group hover:border-gray-200">
               <p className="text-gray-400 cursor-pointer group hover:text-gray-200">
                 start coding
               </p>
@@ -70,8 +75,10 @@ const Home = () => {
             <FaSearchengin className="text-2xl text-primaryText" />
             <input
               type="text"
+              value={searchTerm}
               className="flex-1 px-4 py-1 text-xl bg-transparent outline-none border-none text-primaryText placeholder:text-gray-600"
               placeholder="Search here..."
+              onChange={(e)=> dispatch(SET_SEARCH_TERM(e.target.value))}
             />
           </div>
           {/* profile section */}
@@ -90,7 +97,7 @@ const Home = () => {
             </motion.div>
           )}
 
-          {user && <UserProfileDetails/>}
+          {user && <UserProfileDetails />}
         </div>
         {/* Bottom Section  */}
         <div className="w-full">
