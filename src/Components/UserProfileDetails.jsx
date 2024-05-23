@@ -22,7 +22,7 @@ const UserProfileDetails = () => {
           <>
             <motion.img
               whileHover={{ scale: 1.2 }}
-              src="user?.photoURL"
+              src={user?.photoURL}
               alt={user?.displayName}
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover"
