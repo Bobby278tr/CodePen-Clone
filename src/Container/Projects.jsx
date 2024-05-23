@@ -23,6 +23,7 @@ const Projects = () => {
     } else {
       setFiltered(null);
     }
+    // eslint-disable-next-line
   }, [searchTerm]);
 
   return (
@@ -53,6 +54,7 @@ const Projects = () => {
 const ProjectCard = ({ project, index }) => {
   return (
     <motion.div
+    whileHover={{scale: 0.9}}
       key={index}
       initial={{opacity:0}}
       animate={{opacity:1}}

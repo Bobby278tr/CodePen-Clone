@@ -21,8 +21,8 @@ const NewProject = () => {
   const [output, setOutput] = useState("");
   const [isTitle, setIsTitle] = useState(false);
   const [title, setTitle] = useState("Untitled");
-  const user = useSelector((state)=> state.user.user);
-  const [alert, setAlert] = useState(false)
+  const user = useSelector((state) => (state.user ? state.user.user : null));
+  const [alert, setAlert] = useState(false);
 
   useEffect(() => {
     updateOutput();
@@ -44,33 +44,35 @@ const NewProject = () => {
     setOutput(combinedOutput);
   };
 
-  const saveProject = async()=> {
-    const id = `${Date.now()}`
+  const saveProject = async () => {
+    const id = `${Date.now()}`;
     const _doc = {
-      id : id,
+      id: id,
       title: title,
       html: html,
       css: css,
       js: js,
       output: output,
-      user: user
-    }
-    await setDoc(doc(db, "Projects", id), _doc).then((res)=>{
+      user: user,
+    };
+    await setDoc(doc(db, "Projects", id), _doc)
+      .then((res) => {
+        setAlert(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-      setAlert(true)
-    }).catch((err) => {
-      console.log(err)})
-
-      setInterval(()=>{
-        setInterval(false)
-      }, 2000)
-  }
+    setInterval(() => {
+      setInterval(false);
+    }, 2000);
+  };
 
   return (
     <div className="w-screen h-screen flex flex-col items-start justify-start overflow-hidden">
       {/* alert section */}
 
-      {alert && <Alert status={"Success"} alertMsg={"Project Saved..."}/>}
+      {alert && <Alert status={"Success"} alertMsg={"Project Saved..."} />}
 
       {/* heading section */}
 
@@ -117,9 +119,11 @@ const NewProject = () => {
                     key={"MdCheck"}
                     whileTap={{ scale: 0.9 }}
                     className="cursor-pointer"
-                    onClick={() => {setIsTitle(false)}}
+                    onClick={() => {
+                      setIsTitle(false);
+                    }}
                   >
-                    <MdCheck className="text-2xl text-emerald-500"/>
+                    <MdCheck className="text-2xl text-emerald-500" />
                   </motion.div>
                 </>
               ) : (
@@ -128,9 +132,11 @@ const NewProject = () => {
                     key={"MdEdit"}
                     whileTap={{ scale: 0.9 }}
                     className="cursor-pointer"
-                    onClick={() => {setIsTitle(true)}}
+                    onClick={() => {
+                      setIsTitle(true);
+                    }}
                   >
-                    <MdEdit className="text-2xl text-primaryText"/>
+                    <MdEdit className="text-2xl text-primaryText" />
                   </motion.div>
                 </>
               )}
@@ -138,43 +144,53 @@ const NewProject = () => {
           </div>
 
           {/* follow */}
-          
-          <div className="flex items-center justify-center px-3 -mt-2 gap-2">
-            <p className="text-primaryText text-sm">
-              {user?.displayName ? user.displayName : `${user.email.split("@")[0]}`}
-            </p>
-            <motion.p whileTap={{scale:0.9}} className="text-[10px] bg-emerald-500 rounded-sm px-2 py-[1px] text-primary font-semibold cursor-pointer">
-              + Follow
-            </motion.p>
-          </div>
+
+          {user && (
+            <div className="flex items-center justify-center px-3 -mt-2 gap-2">
+              <p className="text-primaryText text-sm">
+                {user?.displayName
+                  ? user.displayName
+                  : `${user.email.split("@")[0]}`}
+              </p>
+              <motion.p
+                whileTap={{ scale: 0.9 }}
+                className="text-[10px] bg-emerald-500 rounded-sm px-2 py-[1px] text-primary font-semibold cursor-pointer"
+              >
+                + Follow
+              </motion.p>
+            </div>
+          )}
         </div>
 
         {/* user Section */}
         {user && (
           <div className="flex items-center justify-center gap-4 ml-[50%]">
-          <motion.button whileTap={{scale:0.9}} onClick={saveProject} className="px-4 py-3 bg-primaryText cursor-pointer text-base text-primary font-semibold rounded-md">
-            Save
-          </motion.button>
-          <UserProfileDetails />
-        </div>
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={saveProject}
+              className="px-4 py-3 bg-primaryText cursor-pointer text-base text-primary font-semibold rounded-md"
+            >
+              Save
+            </motion.button>
+            <UserProfileDetails />
+          </div>
         )}
         
       </header>
       {/* Editor Section */}
-      <div className="w-full">
+      <div className="w-full h-screen">
         {/* Horizontal pane */}
         <SplitPane
-          className="SplitPane horizontal"
           split="horizontal"
-          minSize={100}
-          maxSize={-100}
+          maxSize="100%"
+          minize="-100%"
           defaultSize={"50%"}
         >
           {/* Top coding section */}
-          <SplitPane split="vertical" minSize={500}>
+          <SplitPane split="vertical" minSize={"500"}>
             {/* HTML code */}
-            <div className="w-full h-[50%] flex flex-col items-start justify-start">
-              <div className="w-full flex items-center justify-between">
+            <div className="w-full flex flex-col items-start justify-start">
+              <div className="w-full flex items-center justify-between ">
                 <div className="bg-secondary px-4 py2 border-t-4 flex items-center justify-center gap-3 border-t-gray-500">
                   <FaHtml5 className=" text-xl text-red-500" />
                   <p className="text-primaryText font-semibold">HTML</p>
@@ -200,7 +216,7 @@ const NewProject = () => {
               </div>
             </div>
 
-            <SplitPane split="vertical" minSize={500}>
+            <SplitPane split="vertical" minSize={"500"}>
               {/* CSS code */}
 
               <div className="w-full h-full flex flex-col items-start justify-start">
@@ -263,7 +279,7 @@ const NewProject = () => {
 
           {/* Bottom result section */}
           <div
-            className="bg-white"
+            className="bg-white "
             style={{ overflow: "hidden", height: "100%" }}
           >
             <iframe
