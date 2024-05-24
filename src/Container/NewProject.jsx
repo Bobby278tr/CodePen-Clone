@@ -5,7 +5,7 @@ import { FaChevronDown, FaCss3, FaHtml5, FaJs } from "react-icons/fa6";
 import { FcSettings } from "react-icons/fc";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Logo } from "../assets";
 import { AnimatePresence, motion } from "framer-motion";
 import { MdCheck, MdEdit } from "react-icons/md";
@@ -14,13 +14,18 @@ import { Alert, UserProfileDetails } from "../Components";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase.config";
 
-const NewProject = () => {
-  const [html, setHtml] = useState("");
-  const [css, setCss] = useState("");
-  const [js, setJs] = useState("");
-  const [output, setOutput] = useState("");
+const NewProject = (props) => {
+  const location = useLocation();
+  const state = location.state? location.state: null;
+  // const { projecttitle, projecthtml, projectcss, projectjs, projectoutput } = state || {};
+  console.log(state)
+  
+  const [html, setHtml] = useState(state?.html? state.html :  "");
+  const [css, setCss] = useState(state?.css? state.css : "");
+  const [js, setJs] = useState(state?.js? state.js : "");
+  const [output, setOutput] = useState(state?.output? state.output : "");
   const [isTitle, setIsTitle] = useState(false);
-  const [title, setTitle] = useState("Untitled");
+  const [title, setTitle] = useState(state?.title? state.title : "Untitled");
   const user = useSelector((state) => (state.user ? state.user.user : null));
   const [alert, setAlert] = useState(false);
 
@@ -64,7 +69,7 @@ const NewProject = () => {
       });
 
     setInterval(() => {
-      setInterval(false);
+      setAlert(false);
     }, 2000);
   };
 
@@ -175,7 +180,6 @@ const NewProject = () => {
             <UserProfileDetails />
           </div>
         )}
-        
       </header>
       {/* Editor Section */}
       <div className="w-full h-screen">
@@ -245,6 +249,9 @@ const NewProject = () => {
                   />
                 </div>
               </div>
+
+              {/* JS code */}
+
 
               {/* JS code */}
 
