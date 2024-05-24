@@ -17,8 +17,6 @@ import { db } from "../config/firebase.config";
 const NewProject = (props) => {
   const location = useLocation();
   const state = location.state? location.state: null;
-  // const { projecttitle, projecthtml, projectcss, projectjs, projectoutput } = state || {};
-  console.log(state)
   
   const [html, setHtml] = useState(state?.html? state.html :  "");
   const [css, setCss] = useState(state?.css? state.css : "");

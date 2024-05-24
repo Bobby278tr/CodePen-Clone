@@ -17,7 +17,6 @@ const App = () => {
   useEffect(() => {
     const unSubscribe = auth.onAuthStateChanged((userCred) => {
       if (userCred) {
-        console.log(userCred?.providerData[0]);
         setDoc(doc(db, "users", userCred?.uid), userCred?.providerData[0]).then(
           () => {
             // dispact the action to redux store
